@@ -1,0 +1,57 @@
+---
+title: "Preparing the LendingClubData Dataset"
+author: "Ryan Kuhn"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{Preparing the LendingClubData Dataset}
+    %\VignetteEngine{knitr::rmarkdown}
+    \usepackage[utf8]{inputenc}
+---
+
+```{r, echo=F}
+knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, eval=F, tidy=F, width=80)
+```
+
+### Introduction  
+Lending Club (LC) publishes data on all of the loans issued on their platform since 2007. The data is updated on a quarterly basis- roughly 6 weeks after the quarter close. The LendingClubData package contains a dataset with this historical data.  It will be updated as new data is published.  The following is the code used to obtain the data from Lending Club.
+
+```{r}
+library(LendingClubData)
+library(dplyr)
+```
+
+```{r makelinks}
+Links<- character()
+  Links[1]<- "LoanStats3a.csv" 
+  Links[2]<- "LoanStats3b.csv"
+  Links[3]<- "LoanStats3c.csv"
+  Links[4]<- "LoanStats3d.csv"
+  Links[5]<- "LoanStats_2016Q1.csv"
+  Links[6]<- "LoanStats_2016Q2.csv"
+  Links[7]<- "LoanStats_2016Q3.csv"
+```
+
+```{r}
+path<-tempdir()
+
+lapply(paste0("https://resources.lendingclub.com/",Links,".zip"), 
+       GetLoanData, 
+       directory=path)
+
+df_list<- lapply(paste0(path,"\\",Links), 
+                 Prep_Loan_Data)
+
+dat<- plyr::rbind.fill(df_list)
+```
+
+The dataset is too big to be hosted on Github as a single file, even compressed as an .rda file. To get around this limitation, I have split the dataset into two data frames and then created a function which combines them again.
+
+```{r}
+split<- floor(nrow(dat)/2)
+LendingClubData_1<- dat[1:split,]
+LendingClubData_2<- dat[(split+1):nrow(dat),]
+
+save(LendingClubData_1, file="data/LendingClubData_1.rda")
+save(LendingClubData_2, file="data/LendingClubData_2.rda")
+```
+
