@@ -3,8 +3,6 @@
 #' Converts LendingClubs data format for use in R
 #'
 #' @param x character string to convert to date value
-#' @export
-#'
 
 DateConv<- function(x){
     suppressWarnings(

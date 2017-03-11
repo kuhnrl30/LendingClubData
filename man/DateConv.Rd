@@ -12,4 +12,3 @@ DateConv(x)
 \description{
 Converts LendingClubs data format for use in R
 }
-

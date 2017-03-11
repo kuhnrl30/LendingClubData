@@ -15,4 +15,3 @@ GetLoanData(address, directory)
 Downloads the loan data from Lending Club's website. The data
 downloads in zip format which this function will unzip.
 }
-

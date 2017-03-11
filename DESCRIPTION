@@ -1,7 +1,8 @@
 Package: LendingClubData
 Type: Package
+Date: 02/28/2017
 Title: Dataset of Historical Loans Issued by Lending Club
-Version: 0.1.0
+Version: 0.1.1
 Author: Ryan Kuhn
 Maintainer: Ryan Kuhn <kuhnrl30@gmail.com>
 URL: https://github.com/kuhnrl30/LendingClubData
@@ -11,7 +12,7 @@ Description: Consolidated dataset of Lending Club loan data for loans issued
 	so this package will be updated periodically to reflect the new data.
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 BuildVignettes: TRUE
 Suggests: knitr
 VignetteBuilder: knitr

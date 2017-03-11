@@ -9,4 +9,3 @@
 Historical loan data downloaded from Lending Club.  The data includes
 over 100 variables for each loan dating back to 2007.
 }
-

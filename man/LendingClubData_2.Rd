@@ -16,4 +16,3 @@ To get the complete dataset, please use the IssuedLoans()
 function.
 }
 \keyword{data}
-

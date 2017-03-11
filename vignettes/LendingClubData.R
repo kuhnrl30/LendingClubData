@@ -32,6 +32,9 @@ knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, ev
 #  LendingClubData_1<- dat[1:split,]
 #  LendingClubData_2<- dat[(split+1):nrow(dat),]
 #  
-#  save(LendingClubData_1, file="data/LendingClubData_1.rda")
-#  save(LendingClubData_2, file="data/LendingClubData_2.rda")
+#  save(LendingClubData_1, file="../data/LendingClubData_1.rda")
+#  save(LendingClubData_2, file="../data/LendingClubData_2.rda")
+
+## ------------------------------------------------------------------------
+#  IssuedLoans()
 

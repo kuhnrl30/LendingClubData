@@ -15,4 +15,3 @@ other variables. Lending Club publishes this data on all loans it has issued
 since 2007 and refreshes it quarterly. The data is published approximately
 6 weeks after the quarter.
 }
-

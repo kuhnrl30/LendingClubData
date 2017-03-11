@@ -3,7 +3,6 @@
 #' Downloads the loan data from Lending Club's website. The data
 #' downloads in zip format which this function will unzip.
 #'
-#' @export
 #' @param address URL for data to download
 #' @param directory relative path where the files will be saved
 

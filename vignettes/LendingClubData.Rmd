@@ -1,7 +1,10 @@
 ---
 title: "Preparing the LendingClubData Dataset"
 author: "Ryan Kuhn"
-output: rmarkdown::html_vignette
+output: 
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
 vignette: >
     %\VignetteIndexEntry{Preparing the LendingClubData Dataset}
     %\VignetteEngine{knitr::rmarkdown}
@@ -51,7 +54,11 @@ split<- floor(nrow(dat)/2)
 LendingClubData_1<- dat[1:split,]
 LendingClubData_2<- dat[(split+1):nrow(dat),]
 
-save(LendingClubData_1, file="data/LendingClubData_1.rda")
-save(LendingClubData_2, file="data/LendingClubData_2.rda")
+save(LendingClubData_1, file="../data/LendingClubData_1.rda")
+save(LendingClubData_2, file="../data/LendingClubData_2.rda")
 ```
 
+You can call the dataset with this function:
+```{r}
+IssuedLoans()
+```
