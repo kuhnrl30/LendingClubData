@@ -1,0 +1,26 @@
+template:
+  params:
+    bootswatch: journal
+reference:
+- title: Functions
+  desc: ~
+  contents:
+  - SetClass
+  - IssuedLoans
+navbar:
+  title: Lending Club Data
+  type: default
+  left:
+  - text: Intro
+    href: articles/LendingClubData.html
+  - text: Functions
+    href: reference/index.html
+  right:
+    - text: Related Packages
+      menu:
+        - text: LendingClub
+          href: http://ryankuhn.net/LendingClub
+        - text: LendingClubData
+          href: http://ryankuhn.net/LendingClubData
+    - icon: fa-github
+      href: https://github.com/kuhnrl30/LendingClubData

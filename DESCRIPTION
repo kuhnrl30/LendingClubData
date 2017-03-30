@@ -3,8 +3,7 @@ Type: Package
 Date: 02/28/2017
 Title: Dataset of Historical Loans Issued by Lending Club
 Version: 0.1.1
-Author: Ryan Kuhn
-Maintainer: Ryan Kuhn <kuhnrl30@gmail.com>
+Authors@R: person("Ryan","Kuhn",email="kuhnrl30@gmail.com", role=c("aut", "cre"))
 URL: https://github.com/kuhnrl30/LendingClubData
 Description: Consolidated dataset of Lending Club loan data for loans issued
     since 2007. There are over 100 variables on each loan including the final 

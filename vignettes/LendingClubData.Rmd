@@ -1,10 +1,7 @@
 ---
 title: "Preparing the LendingClubData Dataset"
 author: "Ryan Kuhn"
-output: 
-  prettydoc::html_pretty:
-    theme: leonids
-    highlight: github
+output: html_vignette
 vignette: >
     %\VignetteIndexEntry{Preparing the LendingClubData Dataset}
     %\VignetteEngine{knitr::rmarkdown}

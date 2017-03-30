@@ -4,3 +4,5 @@ _config.yml
 ^\.travis\.yml
 ^docs/*
 ^README.md
+index.Rmd
+_pkgdown.yml
