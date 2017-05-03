@@ -2,8 +2,9 @@
 #'
 #' Takes a raw downloaded file and converts the columns to the correct data
 #' types. The downloaded file includes character representation of numerical
-#' values. For example, "25%" is converted to a numeric 25.
+#' values. For example, "25\%" is converted to a numeric 25.
 #' @param x file name of a file to convert.
+#' @export
 
 
 Prep_Loan_Data<- function(x){

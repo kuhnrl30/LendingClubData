@@ -20,7 +20,7 @@ navbar:
       menu:
         - text: LendingClub
           href: http://ryankuhn.net/LendingClub
-        - text: LendingClubData
-          href: http://ryankuhn.net/LendingClubData
+        - text: LendingClubModel
+          href: http://ryankuhn.net/LendingClubModel
     - icon: fa-github
       href: https://github.com/kuhnrl30/LendingClubData

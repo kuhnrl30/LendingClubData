@@ -5,6 +5,7 @@
 #'
 #' @param address URL for data to download
 #' @param directory relative path where the files will be saved
+#' @export
 
 GetLoanData<- function(address, directory){
     destination<- paste0(directory,"\\LoanData.zip")

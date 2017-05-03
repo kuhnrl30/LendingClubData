@@ -3,6 +3,7 @@
 #' Converts LendingClubs data format for use in R
 #'
 #' @param x character string to convert to date value
+#' @export
 
 DateConv<- function(x){
     suppressWarnings(
@@ -10,10 +11,10 @@ DateConv<- function(x){
             return(NA)
         } else{
             a<- strsplit(x, split = "-")
-            b<-paste(a[[1]][2],
-                     match(a[[1]][1],month.abb),
-                     "01",
-                     sep="-")
+            b<- sapply(a, function(x) paste(x[2],
+                                            match(x[1],month.abb),
+                                            "01",
+                                            sep="-"))
             as.Date(b)
         }
     )
