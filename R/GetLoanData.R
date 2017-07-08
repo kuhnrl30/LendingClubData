@@ -1,8 +1,9 @@
 #' Get loan data from Lending Club
-#'
-#' Downloads the loan data from Lending Club's website. The data
-#' downloads in zip format which this function will unzip.
-#'
+#' 
+#' Downloads the loan data from Lending Club's website. The links to the data 
+#' downloads return a zipped folder.  This function will unzip the folder and to
+#' extract the .csv file and then delete the initial zip folder.  No action is
+#' taken on the underlying data file.
 #' @param address URL for data to download
 #' @param directory relative path where the files will be saved
 #' @export

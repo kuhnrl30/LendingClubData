@@ -7,6 +7,9 @@ reference:
   contents:
   - SetClass
   - IssuedLoans
+  - PCT
+  - theme_LC
+  - FillNA
 navbar:
   title: Lending Club Data
   type: default

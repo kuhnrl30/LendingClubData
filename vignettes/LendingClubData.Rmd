@@ -9,11 +9,11 @@ vignette: >
 ---
 
 ```{r, echo=F}
-knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, eval=F, tidy=F, width=80)
+knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, eval=F, tidy=F, width=80, message = F, warning= F)
 ```
 
 ### Introduction  
-Lending Club (LC) publishes data on all of the loans issued on their platform since 2007. The data is updated on a quarterly basis- roughly 6 weeks after the quarter close. The LendingClubData package contains a dataset with this historical data.  It will be updated as new data is published.  The following is the code used to obtain the data from Lending Club.
+Lending Club (LC) publishes data on all of the loans issued on their platform since 2007. The data is updated on a quarterly basis- roughly 6 weeks after the quarter close. The LendingClubData package contains a dataset with this historical data.  It will be updated as new data is published.  The following is the code used to obtain the public data from Lending Club.
 
 ```{r}
 library(LendingClubData)
@@ -30,6 +30,7 @@ Links<- character()
   Links[6]<- "LoanStats_2016Q2.csv"
   Links[7]<- "LoanStats_2016Q3.csv"
   Links[8]<- "LoanStats_2016Q4.csv"
+  Links[9]<- "LoanStats_2017Q1.csv"
 ```
 
 ```{r}
@@ -45,12 +46,23 @@ df_list<- lapply(paste0(path,"\\",Links),
 dat<- plyr::rbind.fill(df_list)
 ```
 
+The member data includes additional variables but Lending Club put those files behind a signed URL. I haven't yet figured out if its possible to get past the signature barrier much less get the code together.  In order to assemble the member data, I've downloaded it manually to a folder I've called downloads.  
+
+```{r}
+zips<- dir("../downloads") 
+lapply(paste0("../downloads/",zips), unzip, exdir="../downloads")
+datfiles<- grep("csv$",dir("../downloads"), value=T)
+
+df_list<- lapply(paste0("../downloads/",datfiles), Prep_Loan_Data)
+
+dat<- plyr::rbind.fill(df_list)
+```
+
 There are non-ASCII characters that are converted to ASCII encoding.
 
 ```{r}
 dat$emp_title<- stringi::stri_trans_general(dat$emp_title, "Any-Null")
 dat$desc<- stringi::stri_trans_general(dat$desc, "Any-Null")
-# dat$desc<- grep('C\"B\\0B\\031',dat$desc)
 ```
 
 The dataset is too big to be hosted on Github as a single file, even compressed as an .rda file. To get around this limitation, I have split the dataset into two data frames and then created the \code{IssuedLoans()} function which combines them again.

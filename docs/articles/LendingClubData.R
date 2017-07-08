@@ -1,5 +1,5 @@
 ## ---- echo=F-------------------------------------------------------------
-knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, eval=F, tidy=F, width=80)
+knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, eval=F, tidy=F, width=80, message = F, warning= F)
 
 ## ------------------------------------------------------------------------
 #  library(LendingClubData)
@@ -14,6 +14,8 @@ knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, ev
 #    Links[5]<- "LoanStats_2016Q1.csv"
 #    Links[6]<- "LoanStats_2016Q2.csv"
 #    Links[7]<- "LoanStats_2016Q3.csv"
+#    Links[8]<- "LoanStats_2016Q4.csv"
+#    Links[9]<- "LoanStats_2017Q1.csv"
 
 ## ------------------------------------------------------------------------
 #  path<-tempdir()
@@ -26,6 +28,19 @@ knitr::opts_chunk$set(cache=FALSE, fig.height=3, fig.width = 7, comment=NULL, ev
 #                   Prep_Loan_Data)
 #  
 #  dat<- plyr::rbind.fill(df_list)
+
+## ------------------------------------------------------------------------
+#  zips<- dir("../downloads")
+#  lapply(paste0("../downloads/",zips), unzip, exdir="../downloads")
+#  datfiles<- grep("csv$",dir("../downloads"), value=T)
+#  
+#  df_list<- lapply(paste0("../downloads/",datfiles), Prep_Loan_Data)
+#  
+#  dat<- plyr::rbind.fill(df_list)
+
+## ------------------------------------------------------------------------
+#  dat$emp_title<- stringi::stri_trans_general(dat$emp_title, "Any-Null")
+#  dat$desc<- stringi::stri_trans_general(dat$desc, "Any-Null")
 
 ## ------------------------------------------------------------------------
 #  split<- floor(nrow(dat)/2)

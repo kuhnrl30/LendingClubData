@@ -74,7 +74,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>Lending Club (LC) publishes data on all of the loans issued on their platform since 2007. The data is updated on a quarterly basis- roughly 6 weeks after the quarter close. The LendingClubData package contains a dataset with this historical data. It will be updated as new data is published. The following is the code used to obtain the data from Lending Club.</p>
+<p>Lending Club (LC) publishes data on all of the loans issued on their platform since 2007. The data is updated on a quarterly basis- roughly 6 weeks after the quarter close. The LendingClubData package contains a dataset with this historical data. It will be updated as new data is published. The following is the code used to obtain the public data from Lending Club.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(LendingClubData)
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Links&lt;-<span class="st"> </span><span class="kw">character</span>()
@@ -85,7 +85,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   Links[<span class="dv">5</span>]&lt;-<span class="st"> &quot;LoanStats_2016Q1.csv&quot;</span>
   Links[<span class="dv">6</span>]&lt;-<span class="st"> &quot;LoanStats_2016Q2.csv&quot;</span>
   Links[<span class="dv">7</span>]&lt;-<span class="st"> &quot;LoanStats_2016Q3.csv&quot;</span>
-  Links[<span class="dv">8</span>]&lt;-<span class="st"> &quot;LoanStats_2016Q4.csv&quot;</span></code></pre></div>
+  Links[<span class="dv">8</span>]&lt;-<span class="st"> &quot;LoanStats_2016Q4.csv&quot;</span>
+  Links[<span class="dv">9</span>]&lt;-<span class="st"> &quot;LoanStats_2017Q1.csv&quot;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">path&lt;-<span class="kw">tempdir</span>()
 
 <span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">&quot;https://resources.lendingclub.com/&quot;</span>,Links,<span class="st">&quot;.zip&quot;</span>), 
@@ -96,10 +97,17 @@ df_list&lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class=
                  Prep_Loan_Data)
 
 dat&lt;-<span class="st"> </span>plyr::<span class="kw">rbind.fill</span>(df_list)</code></pre></div>
+<p>The member data includes additional variables but Lending Club put those files behind a signed URL. I haven’t yet figured out if its possible to get past the signature barrier much less get the code together. In order to assemble the member data, I’ve downloaded it manually to a folder I’ve called downloads.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zips&lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">&quot;../downloads&quot;</span>) 
+<span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">&quot;../downloads/&quot;</span>,zips), unzip, <span class="dt">exdir=</span><span class="st">&quot;../downloads&quot;</span>)
+datfiles&lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;csv$&quot;</span>,<span class="kw">dir</span>(<span class="st">&quot;../downloads&quot;</span>), <span class="dt">value=</span>T)
+
+df_list&lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">&quot;../downloads/&quot;</span>,datfiles), Prep_Loan_Data)
+
+dat&lt;-<span class="st"> </span>plyr::<span class="kw">rbind.fill</span>(df_list)</code></pre></div>
 <p>There are non-ASCII characters that are converted to ASCII encoding.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat$emp_title&lt;-<span class="st"> </span>stringi::<span class="kw">stri_trans_general</span>(dat$emp_title, <span class="st">&quot;Any-Null&quot;</span>)
-dat$desc&lt;-<span class="st"> </span>stringi::<span class="kw">stri_trans_general</span>(dat$desc, <span class="st">&quot;Any-Null&quot;</span>)
-<span class="co"># dat$desc&lt;- grep('C\&quot;B\\0B\\031',dat$desc)</span></code></pre></div>
+dat$desc&lt;-<span class="st"> </span>stringi::<span class="kw">stri_trans_general</span>(dat$desc, <span class="st">&quot;Any-Null&quot;</span>)</code></pre></div>
 <p>The dataset is too big to be hosted on Github as a single file, even compressed as an .rda file. To get around this limitation, I have split the dataset into two data frames and then created the  function which combines them again.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split&lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">nrow</span>(dat)/<span class="dv">2</span>)
 LendingClubData_1&lt;-<span class="st"> </span>dat[<span class="dv">1</span>:split,]
