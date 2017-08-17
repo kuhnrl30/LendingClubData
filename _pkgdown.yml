@@ -1,4 +1,4 @@
-template:
+﻿template:
   params:
     bootswatch: journal
 reference:
@@ -10,6 +10,7 @@ reference:
   - PCT
   - theme_LC
   - FillNA
+  - Prep_Loan_Data
 navbar:
   title: Lending Club Data
   type: default

@@ -5,6 +5,4 @@ output: html_document
 [![Build Status](https://travis-ci.org/kuhnrl30/LendingClubData.svg?branch=master)](https://travis-ci.org/kuhnrl30/LendingClubData)
 
 # Lending Club Data  
-This project holds the historical loan data downloaded from Lending Club. The data is freely downloadable from the site, however the download process can take take a few moments to complete. This package reduces that wait time by storing the data locally. 
-
-Under construction...but hopefully coming soon!
+This project holds the historical loan data downloaded from Lending Club. The data is freely downloadable from the site, however the download process can take take a few moments to complete. This package reduces that wait time by storing the data locally. See the Introl link above for the steps taken to get the data.

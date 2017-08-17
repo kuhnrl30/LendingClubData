@@ -31,19 +31,18 @@ Links<- character()
   Links[7]<- "LoanStats_2016Q3.csv"
   Links[8]<- "LoanStats_2016Q4.csv"
   Links[9]<- "LoanStats_2017Q1.csv"
-```
+  Links[10]<- "LoanStats_2017Q2.csv"
 
-```{r}
-path<-tempdir()
-
-lapply(paste0("https://resources.lendingclub.com/",Links,".zip"), 
-       GetLoanData, 
-       directory=path)
-
-df_list<- lapply(paste0(path,"\\",Links), 
-                 Prep_Loan_Data)
-
-dat<- plyr::rbind.fill(df_list)
+# path<-tempdir()
+# 
+# lapply(paste0("https://resources.lendingclub.com/",Links,".zip"), 
+#        GetLoanData, 
+#        directory=path)
+# 
+# df_list<- lapply(paste0(path,"\\",Links), 
+#                  Prep_Loan_Data)
+# 
+# dat<- plyr::rbind.fill(df_list)
 ```
 
 The member data includes additional variables but Lending Club put those files behind a signed URL. I haven't yet figured out if its possible to get past the signature barrier much less get the code together.  In order to assemble the member data, I've downloaded it manually to a folder I've called downloads.  
@@ -65,15 +64,23 @@ dat$emp_title<- stringi::stri_trans_general(dat$emp_title, "Any-Null")
 dat$desc<- stringi::stri_trans_general(dat$desc, "Any-Null")
 ```
 
-The dataset is too big to be hosted on Github as a single file, even compressed as an .rda file. To get around this limitation, I have split the dataset into two data frames and then created the \code{IssuedLoans()} function which combines them again.
+The dataset is too big to be hosted on Github as a single file, even compressed as an .rda file. To get around this limitation, I have split the dataset into seperate data frames by year and then created the \code{IssuedLoans()} function which combines them again.  This also affords the opportunity to provide a subset of years to retrieve instead of pulling the entire historical record.
 
 ```{r}
-split<- floor(nrow(dat)/2)
-LendingClubData_1<- dat[1:split,]
-LendingClubData_2<- dat[(split+1):nrow(dat),]
+dat$issue_year<- format(dat$issue_d, "%Y")
+dat_by_year<- split(dat, dat$issue_year)
+names(dat_by_year)<- paste0("LendingClubData_", names(dat_by_year))
 
-save(LendingClubData_1, file="../data/LendingClubData_1.rda")
-save(LendingClubData_2, file="../data/LendingClubData_2.rda")
+no_years<- 1:length(dat_by_year)
+
+for (i in no_years){
+    var_name<- names(dat_by_year)[[i]]
+    assign(eval(var_name), dat_by_year[[i]])
+    save(list=c(var_name), file=paste0("../data/", var_name, ".rda"))
+    }
+
+rm(list=paste0("LendingClubData_",2007:2017))
+rm(dat_by_year, dat, df_list)
 ```
 
 You can call the dataset with this function:

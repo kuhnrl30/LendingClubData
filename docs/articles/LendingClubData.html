@@ -92,17 +92,19 @@
   Links[<span class="dv">6</span>]&lt;-<span class="st"> "LoanStats_2016Q2.csv"</span>
   Links[<span class="dv">7</span>]&lt;-<span class="st"> "LoanStats_2016Q3.csv"</span>
   Links[<span class="dv">8</span>]&lt;-<span class="st"> "LoanStats_2016Q4.csv"</span>
-  Links[<span class="dv">9</span>]&lt;-<span class="st"> "LoanStats_2017Q1.csv"</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">path&lt;-<span class="kw">tempdir</span>()
+  Links[<span class="dv">9</span>]&lt;-<span class="st"> "LoanStats_2017Q1.csv"</span>
+  Links[<span class="dv">10</span>]&lt;-<span class="st"> "LoanStats_2017Q2.csv"</span>
 
-<span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">"https://resources.lendingclub.com/"</span>,Links,<span class="st">".zip"</span>), 
-       GetLoanData, 
-       <span class="dt">directory=</span>path)
-
-df_list&lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">paste0</span>(path,<span class="st">"</span><span class="ch">\\</span><span class="st">"</span>,Links), 
-                 Prep_Loan_Data)
-
-dat&lt;-<span class="st"> </span>plyr::<span class="kw">rbind.fill</span>(df_list)</code></pre></div>
+<span class="co"># path&lt;-tempdir()</span>
+<span class="co"># </span>
+<span class="co"># lapply(paste0("https://resources.lendingclub.com/",Links,".zip"), </span>
+<span class="co">#        GetLoanData, </span>
+<span class="co">#        directory=path)</span>
+<span class="co"># </span>
+<span class="co"># df_list&lt;- lapply(paste0(path,"\\",Links), </span>
+<span class="co">#                  Prep_Loan_Data)</span>
+<span class="co"># </span>
+<span class="co"># dat&lt;- plyr::rbind.fill(df_list)</span></code></pre></div>
 <p>The member data includes additional variables but Lending Club put those files behind a signed URL. I haven’t yet figured out if its possible to get past the signature barrier much less get the code together. In order to assemble the member data, I’ve downloaded it manually to a folder I’ve called downloads.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zips&lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">"../downloads"</span>) 
 <span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">"../downloads/"</span>,zips), unzip, <span class="dt">exdir=</span><span class="st">"../downloads"</span>)
@@ -110,17 +112,25 @@ datfiles&lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="
 
 df_list&lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">"../downloads/"</span>,datfiles), Prep_Loan_Data)
 
-dat&lt;-<span class="st"> </span>plyr::<span class="kw">rbind.fill</span>(df_list)</code></pre></div>
+dat&lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/plyr/topics/rbind.fill">rbind.fill</a></span>(df_list)</code></pre></div>
 <p>There are non-ASCII characters that are converted to ASCII encoding.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat$emp_title&lt;-<span class="st"> </span>stringi::<span class="kw">stri_trans_general</span>(dat$emp_title, <span class="st">"Any-Null"</span>)
-dat$desc&lt;-<span class="st"> </span>stringi::<span class="kw">stri_trans_general</span>(dat$desc, <span class="st">"Any-Null"</span>)</code></pre></div>
-<p>The dataset is too big to be hosted on Github as a single file, even compressed as an .rda file. To get around this limitation, I have split the dataset into two data frames and then created the  function which combines them again.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split&lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">nrow</span>(dat)/<span class="dv">2</span>)
-LendingClubData_1&lt;-<span class="st"> </span>dat[<span class="dv">1</span>:split,]
-LendingClubData_2&lt;-<span class="st"> </span>dat[(split<span class="dv">+1</span>):<span class="kw">nrow</span>(dat),]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat<span class="op">$</span>emp_title&lt;-<span class="st"> </span>stringi<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_general">stri_trans_general</a></span>(dat<span class="op">$</span>emp_title, <span class="st">"Any-Null"</span>)
+dat<span class="op">$</span>desc&lt;-<span class="st"> </span>stringi<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_general">stri_trans_general</a></span>(dat<span class="op">$</span>desc, <span class="st">"Any-Null"</span>)</code></pre></div>
+<p>The dataset is too big to be hosted on Github as a single file, even compressed as an .rda file. To get around this limitation, I have split the dataset into seperate data frames by year and then created the  function which combines them again. This also affords the opportunity to provide a subset of years to retrieve instead of pulling the entire historical record.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat<span class="op">$</span>issue_year&lt;-<span class="st"> </span><span class="kw">format</span>(dat<span class="op">$</span>issue_d, <span class="st">"%Y"</span>)
+dat_by_year&lt;-<span class="st"> </span><span class="kw">split</span>(dat, dat<span class="op">$</span>issue_year)
+<span class="kw">names</span>(dat_by_year)&lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"LendingClubData_"</span>, <span class="kw">names</span>(dat_by_year))
 
-<span class="kw">save</span>(LendingClubData_1, <span class="dt">file=</span><span class="st">"../data/LendingClubData_1.rda"</span>)
-<span class="kw">save</span>(LendingClubData_2, <span class="dt">file=</span><span class="st">"../data/LendingClubData_2.rda"</span>)</code></pre></div>
+no_years&lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(dat_by_year)
+
+<span class="cf">for</span> (i <span class="cf">in</span> no_years){
+    var_name&lt;-<span class="st"> </span><span class="kw">names</span>(dat_by_year)[[i]]
+    <span class="kw">assign</span>(<span class="kw">eval</span>(var_name), dat_by_year[[i]])
+    <span class="kw">save</span>(<span class="dt">list=</span><span class="kw">c</span>(var_name), <span class="dt">file=</span><span class="kw">paste0</span>(<span class="st">"../data/"</span>, var_name, <span class="st">".rda"</span>))
+    }
+
+<span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">paste0</span>(<span class="st">"LendingClubData_"</span>,<span class="dv">2007</span><span class="op">:</span><span class="dv">2017</span>))
+<span class="kw">rm</span>(dat_by_year, dat, df_list)</code></pre></div>
 <p>You can call the dataset with this function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/IssuedLoans.html">IssuedLoans</a></span>()</code></pre></div>
 </div>
