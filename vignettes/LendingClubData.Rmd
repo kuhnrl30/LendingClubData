@@ -32,17 +32,6 @@ Links<- character()
   Links[8]<- "LoanStats_2016Q4.csv"
   Links[9]<- "LoanStats_2017Q1.csv"
   Links[10]<- "LoanStats_2017Q2.csv"
-
-# path<-tempdir()
-# 
-# lapply(paste0("https://resources.lendingclub.com/",Links,".zip"), 
-#        GetLoanData, 
-#        directory=path)
-# 
-# df_list<- lapply(paste0(path,"\\",Links), 
-#                  Prep_Loan_Data)
-# 
-# dat<- plyr::rbind.fill(df_list)
 ```
 
 The member data includes additional variables but Lending Club put those files behind a signed URL. I haven't yet figured out if its possible to get past the signature barrier much less get the code together.  In order to assemble the member data, I've downloaded it manually to a folder I've called downloads.  

@@ -93,18 +93,7 @@
   Links[<span class="dv">7</span>]&lt;-<span class="st"> "LoanStats_2016Q3.csv"</span>
   Links[<span class="dv">8</span>]&lt;-<span class="st"> "LoanStats_2016Q4.csv"</span>
   Links[<span class="dv">9</span>]&lt;-<span class="st"> "LoanStats_2017Q1.csv"</span>
-  Links[<span class="dv">10</span>]&lt;-<span class="st"> "LoanStats_2017Q2.csv"</span>
-
-<span class="co"># path&lt;-tempdir()</span>
-<span class="co"># </span>
-<span class="co"># lapply(paste0("https://resources.lendingclub.com/",Links,".zip"), </span>
-<span class="co">#        GetLoanData, </span>
-<span class="co">#        directory=path)</span>
-<span class="co"># </span>
-<span class="co"># df_list&lt;- lapply(paste0(path,"\\",Links), </span>
-<span class="co">#                  Prep_Loan_Data)</span>
-<span class="co"># </span>
-<span class="co"># dat&lt;- plyr::rbind.fill(df_list)</span></code></pre></div>
+  Links[<span class="dv">10</span>]&lt;-<span class="st"> "LoanStats_2017Q2.csv"</span></code></pre></div>
 <p>The member data includes additional variables but Lending Club put those files behind a signed URL. I haven’t yet figured out if its possible to get past the signature barrier much less get the code together. In order to assemble the member data, I’ve downloaded it manually to a folder I’ve called downloads.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zips&lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">"../downloads"</span>) 
 <span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">"../downloads/"</span>,zips), unzip, <span class="dt">exdir=</span><span class="st">"../downloads"</span>)
