@@ -16,8 +16,7 @@ IssuedLoans<- function(years=c(2007:2017)){
     
     
     year_list= paste0("LendingClubData_",years)
-    x<-plyr::rbind.fill(get(data(list=year_list, package="LendingClubData")))
-
+    x<-plyr::rbind.fill(lapply(year_list, function(x) get(data(list=x, package= "LendingClubData"))))
     rm(list=year_list, envir=.GlobalEnv)
     x
 }

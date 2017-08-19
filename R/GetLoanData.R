@@ -10,7 +10,7 @@
 
 GetLoanData<- function(address, directory){
     destination<- paste0(directory,"\\LoanData.zip")
-
+    
     download.file(address, destfile=destination, quiet=TRUE)
     unzip(destination,exdir=directory)
     unlink(destination)
