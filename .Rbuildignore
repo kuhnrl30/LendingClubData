@@ -6,3 +6,4 @@ _config.yml
 ^README.md
 index.Rmd
 _pkgdown.yml
+^_pkgdown\.yml$

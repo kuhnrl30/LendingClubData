@@ -84,16 +84,17 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(LendingClubData)
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Links&lt;-<span class="st"> </span><span class="kw">character</span>()
-  Links[<span class="dv">1</span>]&lt;-<span class="st"> "LoanStats3a.csv"</span> 
-  Links[<span class="dv">2</span>]&lt;-<span class="st"> "LoanStats3b.csv"</span>
-  Links[<span class="dv">3</span>]&lt;-<span class="st"> "LoanStats3c.csv"</span>
-  Links[<span class="dv">4</span>]&lt;-<span class="st"> "LoanStats3d.csv"</span>
-  Links[<span class="dv">5</span>]&lt;-<span class="st"> "LoanStats_2016Q1.csv"</span>
-  Links[<span class="dv">6</span>]&lt;-<span class="st"> "LoanStats_2016Q2.csv"</span>
-  Links[<span class="dv">7</span>]&lt;-<span class="st"> "LoanStats_2016Q3.csv"</span>
-  Links[<span class="dv">8</span>]&lt;-<span class="st"> "LoanStats_2016Q4.csv"</span>
-  Links[<span class="dv">9</span>]&lt;-<span class="st"> "LoanStats_2017Q1.csv"</span>
-  Links[<span class="dv">10</span>]&lt;-<span class="st"> "LoanStats_2017Q2.csv"</span></code></pre></div>
+  Links[<span class="dv">1</span>]&lt;-<span class="st">  "LoanStats3a.csv"</span> 
+  Links[<span class="dv">2</span>]&lt;-<span class="st">  "LoanStats3b.csv"</span>
+  Links[<span class="dv">3</span>]&lt;-<span class="st">  "LoanStats3c.csv"</span>
+  Links[<span class="dv">4</span>]&lt;-<span class="st">  "LoanStats3d.csv"</span>
+  Links[<span class="dv">5</span>]&lt;-<span class="st">  "LoanStats_2016Q1.csv"</span>
+  Links[<span class="dv">6</span>]&lt;-<span class="st">  "LoanStats_2016Q2.csv"</span>
+  Links[<span class="dv">7</span>]&lt;-<span class="st">  "LoanStats_2016Q3.csv"</span>
+  Links[<span class="dv">8</span>]&lt;-<span class="st">  "LoanStats_2016Q4.csv"</span>
+  Links[<span class="dv">9</span>]&lt;-<span class="st">  "LoanStats_2017Q1.csv"</span>
+  Links[<span class="dv">10</span>]&lt;-<span class="st"> "LoanStats_2017Q2.csv"</span>
+  Links[<span class="dv">11</span>]&lt;-<span class="st"> "LoanStats_2017Q3.csv"</span></code></pre></div>
 <p>The member data includes additional variables but Lending Club put those files behind a signed URL. I haven’t yet figured out if its possible to get past the signature barrier much less get the code together. In order to assemble the member data, I’ve downloaded it manually to a folder I’ve called downloads.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zips&lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">"../downloads"</span>) 
 <span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">"../downloads/"</span>,zips), unzip, <span class="dt">exdir=</span><span class="st">"../downloads"</span>)
