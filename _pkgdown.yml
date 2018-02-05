@@ -26,5 +26,7 @@ navbar:
           href: http://ryankuhn.net/LendingClub
         - text: LendingClubModel
           href: http://ryankuhn.net/LendingClubModel
+    - text: ryankuhn.net
+      href: http://ryankuhn.net
     - icon: fa-github
       href: https://github.com/kuhnrl30/LendingClubData
