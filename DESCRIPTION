@@ -1,8 +1,8 @@
 Package: LendingClubData
 Type: Package
-Date: 10/11/2017
+Date: 08/20/2018
 Title: Dataset of Historical Loans Issued by Lending Club
-Version: 0.1.4
+Version: 0.1.5
 Authors@R: person("Ryan","Kuhn",email="kuhnrl30@gmail.com", role=c("aut", "cre"), comment=c(ORCID='0000-0001-6827-3492'))
 URL: https://github.com/kuhnrl30/LendingClubData
 Description: Consolidated dataset of Lending Club loan data for loans issued

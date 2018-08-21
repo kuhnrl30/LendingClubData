@@ -22,17 +22,20 @@ library(dplyr)
 
 ```{r makelinks}
 Links<- character()
-  Links[1]<-  "LoanStats3a.csv" 
-  Links[2]<-  "LoanStats3b.csv"
-  Links[3]<-  "LoanStats3c.csv"
-  Links[4]<-  "LoanStats3d.csv"
-  Links[5]<-  "LoanStats_2016Q1.csv"
-  Links[6]<-  "LoanStats_2016Q2.csv"
-  Links[7]<-  "LoanStats_2016Q3.csv"
-  Links[8]<-  "LoanStats_2016Q4.csv"
-  Links[9]<-  "LoanStats_2017Q1.csv"
-  Links[10]<- "LoanStats_2017Q2.csv"
-  Links[11]<- "LoanStats_2017Q3.csv"
+  Links[1]<-  "LoanStats3a_securev1.csv" 
+  Links[2]<-  "LoanStats3b_securev1.csv"
+  Links[3]<-  "LoanStats3c_securev1.csv"
+  Links[4]<-  "LoanStats3d_securev1.csv"
+  Links[5]<-  "LoanStats_securev1_2016Q1.csv"
+  Links[6]<-  "LoanStats_securev1_2016Q2.csv"
+  Links[7]<-  "LoanStats_securev1_2016Q3.csv"
+  Links[8]<-  "LoanStats_securev1_2016Q4.csv"
+  Links[9]<-  "LoanStats_securev1_2017Q1.csv"
+  Links[10]<- "LoanStats_securev1_2017Q2.csv"
+  Links[11]<- "LoanStats_securev1_2017Q3.csv"
+  Links[12]<- "LoanStats_securev1_2017Q4.csv"
+  Links[13]<- "LoanStats_securev1_2018Q1.csv"
+  Links[14]<- "LoanStats_securev1_2018Q2.csv"
 ```
 
 The member data includes additional variables but Lending Club put those files behind a signed URL. I haven't yet figured out if its possible to get past the signature barrier much less get the code together.  In order to assemble the member data, I've downloaded it manually to a folder I've called downloads.  
@@ -69,7 +72,7 @@ for (i in no_years){
     save(list=c(var_name), file=paste0("../data/", var_name, ".rda"))
     }
 
-rm(list=paste0("LendingClubData_",2007:2017))
+rm(list=paste0("LendingClubData_",2007:2018))
 rm(dat_by_year, dat, df_list)
 ```
 
