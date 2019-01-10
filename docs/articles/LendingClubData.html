@@ -8,14 +8,17 @@
 <title>Preparing the LendingClubData Dataset • LendingClubData</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Preparing the LendingClubData Dataset">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -24,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Lending Club Data</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">LendingClubData</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.6</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -52,6 +59,9 @@
   </ul>
 </li>
 <li>
+  <a href="http://ryankuhn.net">ryankuhn.net</a>
+</li>
+<li>
   <a href="https://github.com/kuhnrl30/LendingClubData">
     <span class="fa fa-github"></span>
      
@@ -67,16 +77,19 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Preparing the LendingClubData Dataset</h1>
                         <h4 class="author">Ryan Kuhn</h4>
             
-          </div>
+      
+      <small class="dont-index">Source: <a href="https://github.com/kuhnrl30/LendingClubData/blob/master/vignettes/LendingClubData.Rmd"><code>vignettes/LendingClubData.Rmd</code></a></small>
+      <div class="hidden name"><code>LendingClubData.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="introduction" class="section level3">
 <h3 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h3>
@@ -84,17 +97,21 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(LendingClubData)
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Links&lt;-<span class="st"> </span><span class="kw">character</span>()
-  Links[<span class="dv">1</span>]&lt;-<span class="st">  "LoanStats3a.csv"</span> 
-  Links[<span class="dv">2</span>]&lt;-<span class="st">  "LoanStats3b.csv"</span>
-  Links[<span class="dv">3</span>]&lt;-<span class="st">  "LoanStats3c.csv"</span>
-  Links[<span class="dv">4</span>]&lt;-<span class="st">  "LoanStats3d.csv"</span>
-  Links[<span class="dv">5</span>]&lt;-<span class="st">  "LoanStats_2016Q1.csv"</span>
-  Links[<span class="dv">6</span>]&lt;-<span class="st">  "LoanStats_2016Q2.csv"</span>
-  Links[<span class="dv">7</span>]&lt;-<span class="st">  "LoanStats_2016Q3.csv"</span>
-  Links[<span class="dv">8</span>]&lt;-<span class="st">  "LoanStats_2016Q4.csv"</span>
-  Links[<span class="dv">9</span>]&lt;-<span class="st">  "LoanStats_2017Q1.csv"</span>
-  Links[<span class="dv">10</span>]&lt;-<span class="st"> "LoanStats_2017Q2.csv"</span>
-  Links[<span class="dv">11</span>]&lt;-<span class="st"> "LoanStats_2017Q3.csv"</span></code></pre></div>
+  Links[<span class="dv">1</span>]&lt;-<span class="st">  "LoanStats3a_securev1.csv"</span> 
+  Links[<span class="dv">2</span>]&lt;-<span class="st">  "LoanStats3b_securev1.csv"</span>
+  Links[<span class="dv">3</span>]&lt;-<span class="st">  "LoanStats3c_securev1.csv"</span>
+  Links[<span class="dv">4</span>]&lt;-<span class="st">  "LoanStats3d_securev1.csv"</span>
+  Links[<span class="dv">5</span>]&lt;-<span class="st">  "LoanStats_securev1_2016Q1.csv"</span>
+  Links[<span class="dv">6</span>]&lt;-<span class="st">  "LoanStats_securev1_2016Q2.csv"</span>
+  Links[<span class="dv">7</span>]&lt;-<span class="st">  "LoanStats_securev1_2016Q3.csv"</span>
+  Links[<span class="dv">8</span>]&lt;-<span class="st">  "LoanStats_securev1_2016Q4.csv"</span>
+  Links[<span class="dv">9</span>]&lt;-<span class="st">  "LoanStats_securev1_2017Q1.csv"</span>
+  Links[<span class="dv">10</span>]&lt;-<span class="st"> "LoanStats_securev1_2017Q2.csv"</span>
+  Links[<span class="dv">11</span>]&lt;-<span class="st"> "LoanStats_securev1_2017Q3.csv"</span>
+  Links[<span class="dv">12</span>]&lt;-<span class="st"> "LoanStats_securev1_2017Q4.csv"</span>
+  Links[<span class="dv">13</span>]&lt;-<span class="st"> "LoanStats_securev1_2018Q1.csv"</span>
+  Links[<span class="dv">14</span>]&lt;-<span class="st"> "LoanStats_securev1_2018Q2.csv"</span>
+  Links[<span class="dv">15</span>]&lt;-<span class="st"> "LoanStats_securev1_2018Q3.csv"</span></code></pre></div>
 <p>The member data includes additional variables but Lending Club put those files behind a signed URL. I haven’t yet figured out if its possible to get past the signature barrier much less get the code together. In order to assemble the member data, I’ve downloaded it manually to a folder I’ve called downloads.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zips&lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">"../downloads"</span>) 
 <span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">"../downloads/"</span>,zips), unzip, <span class="dt">exdir=</span><span class="st">"../downloads"</span>)
@@ -119,11 +136,10 @@ no_years&lt;-<span class="st"> </span><span class="dv">1</span><span class="op">
     <span class="kw">save</span>(<span class="dt">list=</span><span class="kw">c</span>(var_name), <span class="dt">file=</span><span class="kw">paste0</span>(<span class="st">"../data/"</span>, var_name, <span class="st">".rda"</span>))
     }
 
-<span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">paste0</span>(<span class="st">"LendingClubData_"</span>,<span class="dv">2007</span><span class="op">:</span><span class="dv">2017</span>))
+<span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">paste0</span>(<span class="st">"LendingClubData_"</span>,<span class="dv">2007</span><span class="op">:</span><span class="dv">2018</span>))
 <span class="kw">rm</span>(dat_by_year, dat, df_list)</code></pre></div>
 <p>You can call the dataset with this function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/IssuedLoans.html">IssuedLoans</a></span>()</code></pre></div>
-</div>
 </div>
   </div>
 
@@ -138,11 +154,13 @@ no_years&lt;-<span class="st"> </span><span class="dv">1</span><span class="op">
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

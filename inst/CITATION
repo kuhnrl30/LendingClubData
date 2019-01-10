@@ -1,0 +1,8 @@
+citHeader("To cite LendingClubData in publications, please use:")
+
+bibentry(bibtype = "Manual",
+         title = "LendingClubData: Dataset of Historical Loans Issued by Lending Club",
+         author = person("Ryan", "Kuhn"),
+         year = 2019,
+         note = "R package version 0.1.6",
+         url = "https://github.com/kuhnrl30/LendingClubData" )

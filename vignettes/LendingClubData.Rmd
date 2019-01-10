@@ -36,6 +36,7 @@ Links<- character()
   Links[12]<- "LoanStats_securev1_2017Q4.csv"
   Links[13]<- "LoanStats_securev1_2018Q1.csv"
   Links[14]<- "LoanStats_securev1_2018Q2.csv"
+  Links[15]<- "LoanStats_securev1_2018Q3.csv"
 ```
 
 The member data includes additional variables but Lending Club put those files behind a signed URL. I haven't yet figured out if its possible to get past the signature barrier much less get the code together.  In order to assemble the member data, I've downloaded it manually to a folder I've called downloads.  

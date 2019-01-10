@@ -4,7 +4,10 @@
 \alias{IssuedLoans}
 \title{Dataset of 1.2MM peer-to-peer loans}
 \usage{
-IssuedLoans()
+IssuedLoans(years = c(2007:2017))
+}
+\arguments{
+\item{years}{numeric vector of years to return}
 }
 \value{
 data frame of historical loans

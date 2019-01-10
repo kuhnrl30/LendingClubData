@@ -22,13 +22,30 @@ function. — LendingClubData_2 • LendingClubData</title>
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Loan Data subset 2
+Second subset of loans issued by Lending Club.  The dataset was
+split into 2 data files to circumvent GitHub's file size limit.
+To get the complete dataset, please use the IssuedLoans()
+function. — LendingClubData_2" />
+
+<meta property="og:description" content="Loan Data subset 2
+Second subset of loans issued by Lending Club.  The dataset was
+split into 2 data files to circumvent GitHub's file size limit.
+To get the complete dataset, please use the IssuedLoans()
+function." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,8 +68,12 @@ function. — LendingClubData_2 • LendingClubData</title>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Lending Club Data</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">LendingClubData</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.6</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -80,12 +101,16 @@ function. — LendingClubData_2 • LendingClubData</title>
   </ul>
 </li>
 <li>
+  <a href="http://ryankuhn.net">ryankuhn.net</a>
+</li>
+<li>
   <a href="https://github.com/kuhnrl30/LendingClubData">
     <span class="fa fa-github"></span>
      
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -93,7 +118,7 @@ function. — LendingClubData_2 • LendingClubData</title>
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Loan Data subset 2
@@ -101,8 +126,11 @@ Second subset of loans issued by Lending Club.  The dataset was
 split into 2 data files to circumvent GitHub's file size limit.
 To get the complete dataset, please use the IssuedLoans()
 function.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kuhnrl30/LendingClubData/blob/master/R/LendingClubData.R'><code>R/LendingClubData.R</code></a></small>
+    <div class="hidden name"><code>LendingClubData_2.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Loan Data subset 2
 Second subset of loans issued by Lending Club.  The dataset was
@@ -110,6 +138,7 @@ split into 2 data files to circumvent GitHub's file size limit.
 To get the complete dataset, please use the IssuedLoans()
 function.</p>
     
+    </div>
 
         
 
@@ -128,11 +157,14 @@ function.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
